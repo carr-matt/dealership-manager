@@ -2,7 +2,7 @@
 
 Team:
 
-* Person 1 - Which microservice?
+* Matt Carr - Service
 * Andrew Collins- SALES
 
 ## Design
