@@ -11,13 +11,13 @@ django.setup()
 
 # Import models from service_rest, here.
 
-from api.service_rest.models import AutomobileVO
+from service_rest.models import AutomobileVO
 
 
 def get_auto():
     response = requests.get("http://inventory-api:8000/api/automobiles/")
     content = json.loads(response.content)
-    print('= = = = = = CONTENT = = = = = =', content)
+    print('***      CONTENT      ***\n', content)
     for automobile in content["autos"]:
         AutomobileVO.objects.update_or_create(
             vin=automobile["vin"],
@@ -28,7 +28,7 @@ def get_auto():
 
 def poll():
     while True:
-        print('= = = = = = Service poller polling for data = = = = = =')
+        print('***      Service poller polling for data      ***\n')
         try:
             get_auto()
         except Exception as e:
