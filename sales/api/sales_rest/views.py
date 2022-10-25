@@ -1,43 +1,13 @@
 import json
-from common.json import ModelEncoder
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
+from .encoders import(
+    SalesPersonEncoder,
+    PotentialCustomerEncoder,
+    SalesRecordEncoder,
+)
 from .models import SalesPerson, PotentialCustomer, SalesRecord, AutomobileVO
 
-class AutomobileVOEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties = ["color", "year", "vin", "sold"]
-
-class SalesPersonEncoder(ModelEncoder):
-    model = SalesPerson
-    properties = [
-        "name",
-        "id",
-    ]
-
-class PotentialCustomerEncoder(ModelEncoder):
-    model = PotentialCustomer
-    properties = [
-        "name",
-        "address",
-        "phone",
-        "id"
-    ]
-
-class SalesRecordEncoder(ModelEncoder):
-    model = SalesRecord
-    properties = [
-        "id",
-        "sales_person",
-        "automobile",
-        "customer",
-        "price",
-    ]
-    encoders = {
-        "sales_person": SalesPersonEncoder(),
-        "automobile": AutomobileVOEncoder(),
-        "customer": PotentialCustomerEncoder(),
-    }
 
 
 @require_http_methods(["GET", "POST"])
@@ -86,7 +56,7 @@ def api_show_customer(request, pk):
             safe=False
         )
 
-
+#create sale
 @require_http_methods(["GET", "POST"])
 def api_list_sales(request):
     if request.method == "GET":
