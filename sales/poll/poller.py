@@ -30,8 +30,8 @@ def poll():
     while True:
         print('Sales poller polling for data')
         try:
-            # Write your polling logic, here
-            pass
+            get_automobile()
+            print(AutomobileVO.objects.all())
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(60)

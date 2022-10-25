@@ -96,32 +96,35 @@ def api_list_sales(request):
             encoder=SalesRecordEncoder,
         )
     else:
+        content = json.loads(request.body)
         try:
-            content = json.loads(request.body)
-
-            vin_key = content["automobile"]
-            automobile = AutomobileVO.objects.get(vin=vin_key)
-            content["automobile"] = automobile
-
-            customer_id = content["customer"]
-            customer = PotentialCustomer.objects.get(id=customer_id)
-            content["customer"] = customer
-
-            salesperson_id = content["sales_person"]
-            sales_person = SalesPerson.objects.get(id=salesperson_id)
-            content["sales_person"] = sales_person
-
-            sales = SalesRecord.objects.create(**content)
-            return JsonResponse(
-                sales,
-                encoder=SalesRecordEncoder,
-                safe=False,
-            )
+            content["automobile"] = AutomobileVO.objects.get(vin=content["automobile"])
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
-                {"message": "Try again"},
+                {"message": "Automobile Invalid"},
                 status=400,
             )
+        try:
+            content["customer"] = PotentialCustomer.objects.get(id=content["customer"])
+        except PotentialCustomer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Customer invalid"},
+                status=400,
+            )
+        try:
+            content["sales_person"] = SalesPerson.objects.get(id=content["sales_person"])
+        except SalesPerson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Person invaild"},
+                status=400,
+            )
+
+        sales = SalesRecord.objects.create(**content)
+        return JsonResponse(
+            sales,
+            encoder=SalesRecordEncoder,
+            safe=False,
+        )
 # Show details of specific sale
 
 

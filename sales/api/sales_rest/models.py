@@ -24,17 +24,17 @@ class PotentialCustomer(models.Model):
 class SalesRecord(models.Model):
     sales_person = models.ForeignKey(
         SalesPerson,
-        related_name="employee",
+        related_name="sales",
         on_delete=models.PROTECT
     )
     automobile = models.ForeignKey(
         AutomobileVO,
-        related_name="vehicle",
+        related_name="sales",
         on_delete=models.PROTECT
     )
     customer = models.ForeignKey(
         PotentialCustomer,
-        related_name="customer",
+        related_name="sales",
         on_delete=models.PROTECT
     )
     price = models.PositiveIntegerField()
