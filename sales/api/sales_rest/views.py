@@ -125,8 +125,6 @@ def api_list_sales(request):
             encoder=SalesRecordEncoder,
             safe=False,
         )
-# Show details of specific sale
-
 
 @require_http_methods(["GET"])
 def api_show_sale(request, pk):
@@ -177,7 +175,6 @@ def api_show_sale(request, pk):
             )
 
 
-# Show sales records for specific sales person
 @require_http_methods(["GET"])
 def api_show_salesperson_records(request, pk):
     if request.method == "GET":

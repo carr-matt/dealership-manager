@@ -13,12 +13,10 @@ class SalesPerson(models.Model):
     id = models.IntegerField(primary_key=True)
 
 
-
 class PotentialCustomer(models.Model):
     name = models.CharField(max_length=100)
     address = models.TextField(max_length=300)
     phone = models.CharField(max_length=15)
-
 
 
 class SalesRecord(models.Model):
