@@ -2,52 +2,10 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from .models import AutomobileVO, Appointment, Tech
-from common.json import ModelEncoder
 import json
+from encoders import AutomobileVOEncoder, TechEncoder, AppointmentEncoder
 
 
-
-# Encoders
-
-class AutomobileVOEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties = [
-        "vin",
-        "color",
-        "year",
-    ]
-
-
-class TechEncoder(ModelEncoder):
-    model = Tech
-    properties = [
-        "name",
-        "id",
-    ]
-
-
-class AppointmentEncoder(ModelEncoder):
-    model = Appointment
-    properties = [
-        "vip",
-        "canceled",
-        "finished",
-        "id",
-        "tech",
-        "owner",
-        "date",
-        "time",
-        "automobile",
-        "reason"
-
-    ]
-    encoders = {
-        "automobile": AutomobileVOEncoder(),
-        "tech": TechEncoder(),
-    }
-
-
-# Views
 
 @require_http_methods(["GET", "POST"])
 def list_appointment(request):
