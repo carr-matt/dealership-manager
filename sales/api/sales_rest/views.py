@@ -1,11 +1,7 @@
 import json
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from .encoders import(
-    SalesPersonEncoder,
-    PotentialCustomerEncoder,
-    SalesRecordEncoder,
-)
+from .encoders import SalesPersonEncoder, PotentialCustomerEncoder, SalesRecordEncoder
 from .models import SalesPerson, PotentialCustomer, SalesRecord, AutomobileVO
 
 
