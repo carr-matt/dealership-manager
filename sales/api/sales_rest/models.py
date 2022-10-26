@@ -10,7 +10,7 @@ class AutomobileVO(models.Model):
 
 class SalesPerson(models.Model):
     name = models.CharField(max_length=100)
-    id = models.IntegerField(primary_key=True)
+    employee_id = models.IntegerField(primary_key=True)
 
 
 class PotentialCustomer(models.Model):

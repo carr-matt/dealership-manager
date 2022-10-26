@@ -9,7 +9,7 @@ class SalesPersonEncoder(ModelEncoder):
     model = SalesPerson
     properties = [
         "name",
-        "id",
+        "employee_id",
     ]
 
 class PotentialCustomerEncoder(ModelEncoder):
