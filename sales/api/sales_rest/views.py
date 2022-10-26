@@ -78,7 +78,7 @@ def api_list_sales(request):
                 status=400,
             )
         try:
-            content["sales_person"] = SalesPerson.objects.get(id=content["sales_person"])
+            content["sales_person"] = SalesPerson.objects.get(employee_id=content["sales_person"])
         except SalesPerson.DoesNotExist:
             return JsonResponse(
                 {"message": "Sales Person Invaild"},

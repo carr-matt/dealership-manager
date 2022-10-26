@@ -24,7 +24,6 @@ class PotentialCustomerEncoder(ModelEncoder):
 class SalesRecordEncoder(ModelEncoder):
     model = SalesRecord
     properties = [
-        "id",
         "sales_person",
         "automobile",
         "customer",
