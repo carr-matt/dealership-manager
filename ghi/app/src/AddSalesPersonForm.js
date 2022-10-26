@@ -9,18 +9,26 @@ class AddSalesPersonForm extends React.Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
+        // this.handleInputChange = this.handleInputChange.bind(this);
     }
-    handleInputChange(event) {
+    handleInputChange=(event)=> {
         const value = event.target.value;
         const name = event.target.name;
         this.setState({ [name]: value})
     }
+    // async componentDidMount() {
+    //     const url = 'http://localhost:8090/api/sales/person/'
+    //     let response = await fetch(url)
+    //     if(response.ok){
+    //         let data = await response.json();
+    //         this.setState({salesPerson: data.salesPerson})
+    //     }
+    // }
 
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state}
-        const salesPersonUrl = "http://lochost:8090/api/sales/person/";
+        const salesPersonUrl = 'http://localhost:8090/api/sales/person/';
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
@@ -28,12 +36,10 @@ class AddSalesPersonForm extends React.Component {
             'Content-Type': 'application/json',
             },
         }
-        const response = await fetch(salesPersonUrl, fetchConfig)
+        const response = await fetch(salesPersonUrl, fetchConfig);
         if(response.ok){
-            this.setState({
-                name: "",
-                employee_id: "",
-            })
+                const newSalesPerson = await response.json();
+            console.log(newSalesPerson);
 
             const cleared ={
                 name: "",
