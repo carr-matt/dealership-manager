@@ -4,14 +4,14 @@ from django.views.decorators.http import require_http_methods
 from .models import AutomobileVO, Appointment, Tech
 import json
 from .encoders import (
-    AutomobileVOEncoder,
+    # AutomobileVOEncoder,
     TechEncoder,
     AppointmentEncoder,
 )
 
 
 @require_http_methods(["GET", "POST"])
-def list_appointment(request):
+def api_list_appointment(request):
     if request.method == "GET":
         appointment = Appointment.objects.all()
         print(appointment)
@@ -44,7 +44,7 @@ def list_appointment(request):
 
 
 @require_http_methods(["DELETE", "GET", "PUT"])
-def show_appointment(request, pk):
+def api_show_appointment(request, pk):
     if request.method == "GET":
         try:
             appointment = Appointment.objects.get(id=pk)
@@ -90,7 +90,7 @@ def show_appointment(request, pk):
 
 
 @require_http_methods(["GET", "POST"])
-def list_tech(request):
+def api_list_tech(request):
     if request.method == "GET":
         tech = Tech.objects.all()
         return JsonResponse(
@@ -115,7 +115,7 @@ def list_tech(request):
 
 
 @require_http_methods(["DELETE", "GET", "PUT"])
-def show_tech(request, pk):
+def api_show_tech(request, pk):
     if request.method == "GET":
         try:
             tech = Tech.objects.get(id=pk)
@@ -161,7 +161,7 @@ def show_tech(request, pk):
 
 
 @require_http_methods(["GET"])
-def list_service_history(request, vin):
+def api_list_service_history(request, vin):
     if request.method == "GET":
         try:
             service = Appointment.objects.filter(automobile__vin=vin)

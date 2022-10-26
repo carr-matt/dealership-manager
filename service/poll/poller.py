@@ -17,13 +17,14 @@ from service_rest.models import AutomobileVO
 def get_auto():
     response = requests.get("http://inventory-api:8000/api/automobiles/")
     content = json.loads(response.content)
-    print('***      CONTENT      ***\n', content)
+    print('***            Auto Inventory            ***\n', content)
     for automobile in content["autos"]:
         AutomobileVO.objects.update_or_create(
-            vin=automobile["vin"],
-            defaults={"year": automobile["year"],
-            "color": automobile["color"]},
-   )
+            import_href = automobile["href"],
+            defaults = {
+                "vin": automobile["vin"]
+            },
+        )
 
 
 def poll():
@@ -33,7 +34,7 @@ def poll():
             get_auto()
         except Exception as e:
             print(e, file=sys.stderr)
-        time.sleep(30)
+        time.sleep(60)
 
 
 if __name__ == "__main__":
