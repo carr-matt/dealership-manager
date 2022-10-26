@@ -74,14 +74,14 @@ def api_list_sales(request):
             content["customer"] = PotentialCustomer.objects.get(id=content["customer"])
         except PotentialCustomer.DoesNotExist:
             return JsonResponse(
-                {"message": "Customer invalid"},
+                {"message": "Customer Invalid"},
                 status=400,
             )
         try:
             content["sales_person"] = SalesPerson.objects.get(id=content["sales_person"])
         except SalesPerson.DoesNotExist:
             return JsonResponse(
-                {"message": "Person invaild"},
+                {"message": "Sales Person Invaild"},
                 status=400,
             )
 

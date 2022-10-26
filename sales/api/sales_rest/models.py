@@ -9,13 +9,13 @@ class AutomobileVO(models.Model):
 
 
 class SalesPerson(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
     employee_id = models.IntegerField(primary_key=True)
 
 
 class PotentialCustomer(models.Model):
-    name = models.CharField(max_length=100)
-    address = models.TextField(max_length=300)
+    name = models.CharField(max_length=50)
+    address = models.TextField(max_length=100)
     phone = models.CharField(max_length=15)
 
 
