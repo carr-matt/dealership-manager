@@ -7,8 +7,7 @@ class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
         "vin",
-        "color",
-        "year",
+        "import_href",
     ]
 
 
@@ -16,7 +15,7 @@ class TechEncoder(ModelEncoder):
     model = Tech
     properties = [
         "name",
-        "id",
+        "employee_id",
     ]
 
 
@@ -32,8 +31,7 @@ class AppointmentEncoder(ModelEncoder):
         "date",
         "time",
         "automobile",
-        "reason"
-
+        "reason",
     ]
     encoders = {
         "automobile": AutomobileVOEncoder(),
