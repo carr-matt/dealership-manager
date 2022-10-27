@@ -22,16 +22,14 @@ class TechEncoder(ModelEncoder):
 class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
-        "vip",
-        "canceled",
-        "finished",
         "id",
+        "automobile",
         "tech",
         "owner",
         "date",
-        "time",
-        "automobile",
         "reason",
+        "finished",
+        "vip",
     ]
     encoders = {
         "automobile": AutomobileVOEncoder(),
