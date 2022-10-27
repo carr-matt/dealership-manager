@@ -6,11 +6,11 @@ class SaleRecordForm extends React.Component {
         super(props)
         this.state = {
             automobiles: [],
-            automobiles: '',
+            automobile: '',
             salesPersons: [],
-            salesPersons: '',
+            salesPerson: '',
             customers: [],
-            customers: '',
+            customer: '',
             price: '',
         };
         this.handleSubmit = this.handleSubmit.bind(this);
