@@ -4,11 +4,13 @@ from .views import (
     api_show_appointment,
     api_list_tech,
     api_show_tech,
+    api_appt_history,
 )
 
 urlpatterns = [
     path("service/appt/", api_list_appointment, name="api_list_appointment"),
     path("service/appt/<int:pk>/", api_show_appointment, name="api_show_appointment"),
+    path("service/history/<str:vin>/", api_appt_history, name="api_appt_history"),
     path("service/tech/", api_list_tech, name="api_list_tech"),
     path("tech/<int:pk>/", api_show_tech, name="api_show_tech"),
-]
+    ]

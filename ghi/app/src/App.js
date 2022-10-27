@@ -8,6 +8,7 @@ import ManufacturerList from './ManufacturerList';
 import SaleRecordForm from './CreateSaleForm'
 import TechForm from './TechForm';
 import ServiceApptForm from './ServiceApptForm';
+import ServiceApptsList from './ServiceApptsList';
 import CreateModelForm from './CreateModelForm';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           </Route>
           <Route path='service/tech/' element={<TechForm />} />
           <Route path='service/appt/' element={<ServiceApptForm />} />
+          <Route path='/service/appt/list' element={<ServiceApptsList />} />
         </Routes>
       </div>
     </BrowserRouter>
