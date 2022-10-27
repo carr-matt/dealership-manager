@@ -14,10 +14,10 @@ function Nav() {
             <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
             </li>
             <li className="nav-item">
-                  <NavLink className="nav-link" aria-current="page" to="/sales/person">Add an new sales employee</NavLink>
+                  <NavLink className="nav-link" aria-current="page" to="/sales/person">Enroll Sales Employee</NavLink>
               </li>
               <li className="nav-item">
-                  <NavLink className="nav-link" aria-current="page" to="/sales/customer">Add an customer</NavLink>
+                  <NavLink className="nav-link" aria-current="page" to="/sales/customer">Add Customer</NavLink>
               </li>
               <li className="nav-item">
                   <NavLink className="nav-link" aria-current="page" to="/manufacturer/new">Add Manufacturer</NavLink>
@@ -29,7 +29,7 @@ function Nav() {
                   <NavLink className="nav-link" aria-current="page" to="/manufacturer">Manufacturer List</NavLink>
               </li>
               <li className="nav-item">
-                  <NavLink className="nav-link" aria-current="page" to="/sales/new">New Sale!</NavLink>
+                  <NavLink className="nav-link" aria-current="page" to="/sales/new">New Sale</NavLink>
               </li>
             <li className="nav-item">
             <NavLink className="nav-link" aria-current="page" to="/service/tech">
