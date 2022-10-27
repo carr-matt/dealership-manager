@@ -18,10 +18,11 @@ class Tech(models.Model):
 
 
 class Appointment(models.Model):
-    automobile = models.ForeignKey(AutomobileVO, related_name="appointment", on_delete=models.PROTECT)
+    vin = models.CharField(max_length=17)
     tech = models.ForeignKey(Tech, related_name="appointment", on_delete=models.PROTECT)
     owner = models.CharField(max_length=50)
-    date = models.DateTimeField(auto_now_add=False, auto_now=False)
+    date = models.DateField(blank=True, null=True)
+    time = models.TimeField(blank=True, null=True)
     reason = models.CharField(max_length=400)
     finished = models.BooleanField()
     vip = models.BooleanField(default=False)

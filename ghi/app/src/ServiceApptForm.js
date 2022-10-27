@@ -4,17 +4,15 @@ class ServiceApptForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            automobile: "",
-            automobiles: [],
+            vin: "",
             owner: "",
             date: "",
             time: "",
-            tech: "",
             techs: [],
             reason: "",
         }
 
-        this.handleAutomobileChange = this.handleAutomobileChange.bind(this)
+        this.handleVinChange = this.handleVinChange.bind(this)
         this.handleOwnerChange = this.handleOwnerChange.bind(this)
         this.handleDateChange = this.handleDateChange.bind(this)
         this.handleTimeChange = this.handleTimeChange.bind(this)
@@ -23,9 +21,9 @@ class ServiceApptForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleAutomobileChange(event) {
+    handleVinChange(event) {
         const value = event.target.value
-        this.setState({automobile: value})
+        this.setState({vin: value})
     }
     handleOwnerChange(event) {
         const value = event.target.value
@@ -65,11 +63,11 @@ class ServiceApptForm extends React.Component {
         const response = await fetch(apptUrl, fetchConfig)
 
     if (response.ok) {
-        const newAppointment = await response.json()
-        console.log(newAppointment)
+        const Appt = await response.json()
+        console.log(Appt)
 
         const cleared = {
-            automobile: "",
+            vin: "",
             owner: "",
             date: "",
             time: "",
@@ -87,7 +85,7 @@ class ServiceApptForm extends React.Component {
 
         if (response.ok) {
             const data = await response.json()
-            this.setState({tech: data.techs })
+            this.setState({techs: data.techs })
         }
     }
 
@@ -99,8 +97,8 @@ render() {
             <h1>Schedule an Service Appointment</h1>
             <form onSubmit={this.handleSubmit} id="create-appt-form">
                 <div className="form-floating mb-3">
-                <input value={this.state.automobile} onChange={this.handleAutomobileChange} placeholder="automobile" required type="text" name="automobile" id="automobile" className="form-control"/>
-                <label htmlFor="automobile">VIN</label>
+                <input value={this.state.vin} onChange={this.handleVinChange} placeholder="vin" required type="text" name="vin" id="vin" className="form-control"/>
+                <label htmlFor="vin">VIN</label>
                 </div>
                 <div className="form-floating mb-3">
                 <input value={this.state.owner} onChange={this.handleOwnerChange} placeholder="owner" name="owner" type="text" id="owner" className="form-control"/>

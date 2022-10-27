@@ -38,6 +38,11 @@ function Nav() {
             Schedule Service
             </NavLink>
             </li>
+            <li className="nav-item">
+            <NavLink className="nav-link" aria-current="page" to="/service/appt/list">
+            Appointments List
+            </NavLink>
+            </li>
           </ul>
         </div>
       </div>
