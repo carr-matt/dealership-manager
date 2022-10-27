@@ -21,7 +21,7 @@ class SaleRecordForm extends React.Component {
         const name = event.target.name;
         this.setState({ [name]: value})
     }
-    //CHECK URL PATHS- NEED TO FINISH
+    //CHECK URL PATHS- NEED TO
     async componentDidMount() {
         const autoUrl = 'http://localhost:8100/api/automobiles/'
         const saleUrl = 'http://localhost:8090/api/sales/person/'
@@ -49,3 +49,6 @@ class SaleRecordForm extends React.Component {
             'Content-Type': 'application/json',
             },
         }
+    }
+}
+    export default SaleRecordForm;
