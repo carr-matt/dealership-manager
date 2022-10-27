@@ -20,7 +20,10 @@ function Nav() {
                   <NavLink className="nav-link" aria-current="page" to="/sales/customer">Add an customer</NavLink>
               </li>
               <li className="nav-item">
-                  <NavLink className="nav-link" aria-current="page" to="/manufacturer/new">Add an manufacturer</NavLink>
+                  <NavLink className="nav-link" aria-current="page" to="/manufacturer/new">Add Manufacturer</NavLink>
+              </li>
+              <li className="nav-item">
+                  <NavLink className="nav-link" aria-current="page" to="/manufacturer/model">Add Model</NavLink>
               </li>
               <li className="nav-item">
                   <NavLink className="nav-link" aria-current="page" to="/manufacturer">Manufacturer List</NavLink>
