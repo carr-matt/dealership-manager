@@ -22,8 +22,7 @@ class CreateModelForm extends React.Component {
     }
 
     async componentDidMount() {
-        const url = 'http://localhost:8100/api/manufacturers/';
-        const response = await fetch(url);
+        const response = await fetch('http://localhost:8100/api/manufacturers/');
 
         if (response.ok) {
             const data = await response.json();
@@ -76,7 +75,7 @@ class CreateModelForm extends React.Component {
                             <div className="form-floating mb-3">
                                 <input onChange={this.handleInputChange} value={this.state.name} placeholder="name" required type="text" name="name" id="name" className="form-control" />
                                 <label htmlFor="manufacturer">Add Model</label>
-                                </div>
+                            </div>
                                 <div className="form-floating mb-3">
                                     <input onChange={this.handleInputChange} value={this.state.picture_url} placeholder="Picture" required type="text" name="picture_url" id="picture_url" className="form-control" />
                                     <label htmlFor="picture_url">Picture URL</label>

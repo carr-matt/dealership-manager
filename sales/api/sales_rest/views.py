@@ -1,7 +1,7 @@
 import json
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from .encoders import SalesPersonEncoder, PotentialCustomerEncoder, SalesRecordEncoder
+from .encoders import SalesPersonEncoder, PotentialCustomerEncoder, SalesRecordEncoder, AutomobileVOEncoder
 from .models import SalesPerson, PotentialCustomer, SalesRecord, AutomobileVO
 
 
@@ -155,3 +155,10 @@ def api_show_salesperson_records(request, pk):
             response = JsonResponse({"message": "Try again"})
             response.status_code = 404
             return response
+
+@require_http_methods(["GET"])
+def api_unsold_vehicles(request):
+    if request.method == "GET":
+        sold_vehicles = [sale_list.automobile.vin for sale_list in SalesRecord.objects.all()]
+        unsold_vehicles = AutomobileVO.objects.exclude(vin__in=sold_vehicles)
+        return JsonResponse({"automobiles": unsold_vehicles}, encoder= AutomobileVOEncoder, safe=False)
