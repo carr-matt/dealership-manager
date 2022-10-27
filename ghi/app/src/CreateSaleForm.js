@@ -41,7 +41,7 @@ class SaleRecordForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state}
-        const salesPersonUrl = 'http://localhost:8090/api/sales/person/';
+        const newSaleUrl = 'http://localhost:8090/api/sales/';
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),

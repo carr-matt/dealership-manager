@@ -8,6 +8,7 @@ class ServiceApptForm extends React.Component {
             owner: "",
             date: "",
             time: "",
+            tech: "",
             techs: [],
             reason: "",
         }
@@ -121,8 +122,7 @@ render() {
                     <option value="">Choose a Tech</option>
                     {this.state.techs.map(tech => {
                     return (
-                        <option key={tech.id} value={tech.id}>
-                        {tech.tech_name}
+                        <option key={tech.id} value={tech.id}>{tech.name}
                         </option>
                     )
                     })}
