@@ -1,70 +1,76 @@
-import React from 'react'
+import React from 'react';
+
 
 class TechForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            name: "",
-            employee_id: "",
-        };
+  constructor(props) {
+    super(props)
+    this.state = {
+      tech_name: '',
+      employee_num: '',
+    }
+  }
 
-        this.handleSubmit = this.handleSubmit.bind(this);
+  handleCreate = async (event) => {
+    event.preventDefault();
+    const data = { ...this.state };
+    const technicianUrl = 'http://localhost:8080/api/tech/';
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      }
     }
 
-    handleInputChange=(event)=> {
-        const value = event.target.value;
-        const name = event.target.name;
-        this.setState({ [name]: value})
+    const response = await fetch(technicianUrl, fetchConfig);
+
+    if (response.ok) {
+      const cleared = {
+        tech_name: '',
+        employee_num: '',
+      }
+      this.setState(cleared);
     }
+  }
+
+  handleTechNameChange = (event) => {
+    const value = event.target.value;
+    this.setState({ tech_name: value })
+  }
+
+  handleEmployeeNumChange = (event) => {
+    const value = event.target.value;
+    this.setState({ employee_num: value })
+  }
 
 
-    async handleSubmit(event) {
-        event.preventDefault();
-        const data = {...this.state}
-        const techUrl = 'http://localhost:8080/api/service/tech/';
-        const fetchConfig = {
-            method: "post",
-            body: JSON.stringify(data),
-            headers: {
-            'Content-Type': 'application/json',
-            },
-        }
-        const response = await fetch(techUrl, fetchConfig);
-        if(response.ok){
-                const newTech = await response.json();
-            console.log(newTech);
-
-            const cleared ={
-                name: "",
-                employee_id: "",
-            }
-            this.setState(cleared)
-        }
-    };
-
-
-    render() {
-        return (
-            <div className="row">
-                <div className="offset-3 col-6">
-                    <div className="shadow p-4 mt-4">
-                        <h1>Add a new technician</h1>
-                        <form onSubmit={this.handleSubmit} id="add-tech-form">
-                            <div className="form-floating mb-3">
-                                <input onChange={this.handleInputChange} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
-                                <label htmlFor="name">Name</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input onChange={this.handleInputChange} value={this.state.employee_id} placeholder="Employee Id" required type="text" name="employee_id" id="employee_id" className="form-control" />
-                                <label htmlFor="id">Employee ID</label>
-                            </div>
-                            <button className="btn btn-primary" id="salesPersBtn">Enroll</button>
-                        </form>
-                    </div>
+  render() {
+    return (
+      <>
+        <div className="row">
+          <div className="offset-3 col-6">
+            <div className="shadow p-4 mt-4">
+              <h1>Enroll a Technician</h1>
+              <form onSubmit={this.handleCreate} id="add-tech-form">
+                <div className="form-floating mb-3">
+                  <input onChange={this.handleTechNameChange} value={this.state.tech_name} placeholder="Owner Name" required type="text" name="tech_name" id="tech_name"
+                    className="form-control" />
+                  <label htmlFor="name">Name</label>
                 </div>
+                <div className="form-floating mb-3">
+                  <input onChange={this.handleEmployeeNumChange} value={this.state.employee_num} placeholder="Name" required type="text" name="employee_num" id="employee_num"
+                    className="form-control" />
+                  <label htmlFor="name">Employee Number</label>
+                </div>
+                <button className="btn btn-primary">Submit</button>
+              </form>
             </div>
-        );
-    }
+          </div>
+        </div>
+      </>
+    )
+  }
 }
 
-export default TechForm;
+
+export default TechForm
