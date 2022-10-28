@@ -36,7 +36,7 @@ class ServiceDetailEncoder(ModelEncoder):
         "owner_name",
         "appointment",
         "tech_name",
-        "service_name",
+        "reason",
         "vip",
         "finished",
     ]
@@ -55,7 +55,7 @@ class ServiceListEncoder(ModelEncoder):
         "owner_name",
         "appointment",
         "tech_name",
-        "service_name",
+        "reason",
         "vip",
         "id",
         "finished",

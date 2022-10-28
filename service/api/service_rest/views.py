@@ -41,6 +41,7 @@ def api_list_services(request, vin_vo_id=None):
             safe=False,
         )
 
+
 @require_http_methods(["GET", "DELETE", "PUT"])
 def api_show_service(request, pk):
     if request.method == "GET":
