@@ -9,21 +9,13 @@ class AddSalesPersonForm extends React.Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleInputChange = this.handleInputChange.bind(this);
+
     }
     handleInputChange=(event)=> {
         const value = event.target.value;
         const name = event.target.name;
         this.setState({ [name]: value})
     }
-    // async componentDidMount() {
-    //     const url = 'http://localhost:8090/api/sales/person/'
-    //     let response = await fetch(url)
-    //     if(response.ok){
-    //         let data = await response.json();
-    //         this.setState({salesPerson: data.salesPerson})
-    //     }
-    // }
 
     async handleSubmit(event) {
         event.preventDefault();
