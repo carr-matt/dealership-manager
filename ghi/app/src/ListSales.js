@@ -40,7 +40,7 @@ class ListSales extends React.Component {
                                 <td>{sales.sales_person.name}</td>
                                 <td>{sales.customer.name}</td>
                                 <td>{sales.automobile.vin}</td>
-                                <td>{sales.price}</td>
+                                <td>${sales.price}</td>
                             </tr>
                         )
                     })}
