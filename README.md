@@ -1,11 +1,12 @@
 # CarCar
 
-Team:
+### Team:
 
-* Matt Carr - Service
-* Andrew Collins- SALES
+* Matt Carr - Service microservice
+* Andrew Collins- Sales microservice
 
 ## Design
+
 
 ## Service microservice
 

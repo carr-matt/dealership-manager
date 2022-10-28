@@ -1,84 +1,77 @@
-import './App.css'
-import React from 'react'
-
-class ServiceHistoryList extends React.Component{
-    constructor() {
-        super()
-        this.state = {
-            vin: "",
-            appts: []
-        }
-        this.handleVinChange = this.handleVinChange.bind(this)
-        this.handleSubmitClick = this.handleSubmitClick.bind(this)
-    }
-    handleVinChange(event) {
-        const value = event.target.value
-        this.setState({vin: value})
-    }
-
-    async handleSubmitClick(event) {
-        event.preventDefault()
-        const data = {...this.state}
-        const submitUrl = `http://localhost:8080/api/service/history/${data.vin}/`
-        const fetchConfig = {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application.json'
-            }
-        }
-        const response = await fetch(submitUrl, fetchConfig)
-        console.log(response)
-        if (response.ok) {
-            const history = await response.json()
-            console.log("history", history)
-            this.setState({appts: history})
-
-        }
-    }
+import React, { useState, useEffect } from 'react';
 
 
-render () {
-    return (
-        <div>
-        <div className="input-group">
-            <form onSubmit = { this.handleSubmitClick } id = "searchbar" className = "search-bar" >
-                <input value = { this.state.vin } onChange = { this.handleVinChange } placeholder="Search VIN" name="VIN" required type="search" id="VIN" />
-                <button className="btn btn-outline-primary">Search</button>
-            </form>
-        </div>
-        <div>
+
+function ServiceHistoryList() {
+  const [servicesData, setService] = useState([]);
+  const [inputVin, setInputVin] = useState("");
+  const [vin, setVin] = useState([]);
+
+
+  const fetchService = async () => {
+    const url = 'http://localhost:8080/api/service';
+    const response = await fetch(url)
+    const servicesJson = await response.json();
+    setService(servicesJson.services)
+  }
+
+  useEffect(() => {
+    fetchService()
+  }, []);
+
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const searchedVin = servicesData.filter(service => service.vin === inputVin);
+    setVin(searchedVin);
+  }
+
+
+  return (
+    <>
+      <div className="my-5 container">
+        <form onSubmit={handleSearch} id="vin-search-form">
+          <div className="form-floating mb-3 input-group">
+            <input onChange={event => setInputVin(event.target.value)} value={inputVin} placeholder="VIN" id="vin" type="text" name="vin"
+              className="form-control" />
+            <span className="input-group-text"><button className="btn">
+                Search VIN</button>
+            </span>
+          </div>
+        </form>
         <table className="table table-striped">
-        <thead>
+
+          <thead>
             <tr>
-                <th>VIP Status</th>
-                <th>VIN</th>
-                <th>Owner</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Tech</th>
-                <th>Reason</th>
+              <th>VIN</th>
+              <th>Customer Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Technician</th>
+              <th>Reason</th>
             </tr>
-        </thead>
-        <tbody>
-            {this.state.appts.map(appt => {
-            return (
-                <tr key={appt.id}>
-                    <td>{ String(appt.VIP) }</td>
-                    <td>{ appt.vin }</td>
-                    <td>{ appt.owner }</td>
-                    <td>{ appt.date }</td>
-                    <td>{ appt.time }</td>
-                    <td>{ appt.tech.id }</td>
-                    <td>{ appt.reason }</td>
+          </thead>
+
+          <tbody>
+            {vin.map((service) => {
+              return (
+                <tr key={service.id}>
+                  <td>{service.vin}</td>
+                  <td>{service.owner_name}</td>
+                  <td>{new Date(service.appointment).toLocaleDateString()}</td>
+                  <td>{new Date(service.appointment).toLocaleTimeString()}</td>
+                  <td>{service.tech_name.tech_name}</td>
+                  <td>{service.reason}</td>
                 </tr>
-            );
+              )
             })}
-        </tbody>
+          </tbody>
+
         </table>
-        </div>
-        </div>
-    );
-    }
+      </div>
+    </>
+  )
 }
 
-export default ServiceHistoryList;
+
+export default ServiceHistoryList
