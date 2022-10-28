@@ -11,30 +11,30 @@ class ManufacturerForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
-    handleInputChange=(event)=> {
+    handleInputChange = (event) => {
         const value = event.target.value;
         const name = event.target.name;
-        this.setState({ [name]: value})
+        this.setState({ [name]: value })
     }
 
     async handleSubmit(event) {
         event.preventDefault();
-        const data = {...this.state}
+        const data = { ...this.state }
         const manufactuerUrl = 'http://localhost:8100/api/manufacturers/';
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
             headers: {
-            'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
         }
 
         const response = await fetch(manufactuerUrl, fetchConfig);
-        if(response.ok){
-                const newManufacturerForm = await response.json();
+        if (response.ok) {
+            const newManufacturerForm = await response.json();
             console.log(newManufacturerForm);
 
-            const cleared ={
+            const cleared = {
                 name: "",
             }
             this.setState(cleared)

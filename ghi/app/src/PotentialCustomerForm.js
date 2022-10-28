@@ -12,28 +12,28 @@ class AddPotentialCustomerForm extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleInputChange=(event)=> {
+    handleInputChange = (event) => {
         const value = event.target.value;
         const name = event.target.name;
-        this.setState({ [name]: value})
+        this.setState({ [name]: value })
     }
     async handleSubmit(event) {
         event.preventDefault();
-        const data = {...this.state}
+        const data = { ...this.state }
         const customerUrl = 'http://localhost:8090/api/sales/customer/';
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
             headers: {
-            'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
         }
         const response = await fetch(customerUrl, fetchConfig);
-        if(response.ok){
-                const newCustomer = await response.json();
+        if (response.ok) {
+            const newCustomer = await response.json();
             console.log(newCustomer);
 
-            const cleared ={
+            const cleared = {
                 name: "",
                 address: "",
                 phone: "",

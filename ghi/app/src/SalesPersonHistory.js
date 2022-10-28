@@ -15,12 +15,12 @@ class SalesPersonHistoryList extends React.Component {
     }
     handleInputChange = (event) => {
         const value = event.target.value;
-        this.setState({ salesPerson: value}, () => {this.filteredfunction()} )
+        this.setState({ salesPerson: value }, () => { this.filteredfunction() })
     }
 
-    filteredfunction(){
+    filteredfunction() {
         const result = this.state.sales.filter(sale => sale.sales_person.employee_id === Number(this.state.salesPerson))
-        this.setState({recordsFiltered: result})
+        this.setState({ recordsFiltered: result })
     }
     async componentDidMount() {
 
@@ -30,7 +30,7 @@ class SalesPersonHistoryList extends React.Component {
             const salesData = await saleHistoryResponse.json();
             const personsData = await salePersonsResponse.json();
 
-            this.setState({ salesPersons: personsData.sales_people});
+            this.setState({ salesPersons: personsData.sales_people });
             this.setState({ sales: salesData.sales, recordsFiltered: salesData.sales });
         }
     }

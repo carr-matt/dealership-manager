@@ -5,8 +5,8 @@ class ManufacturerList extends React.Component {
         super(props);
         this.state = {
             manufacturers: []
-            };
-        }
+        };
+    }
 
     async componentDidMount() {
         const url = 'http://localhost:8100/api/manufacturers/'
@@ -15,29 +15,29 @@ class ManufacturerList extends React.Component {
 
         if (response.ok) {
             const data = await response.json();
-            this.setState({manufacturers: data.manufacturers})
+            this.setState({ manufacturers: data.manufacturers })
         }
     }
 
     render() {
-        return(
+        return (
             <div className="container">
                 <h1>List of manufacturers</h1>
                 <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.manufacturers.map(manufacturer => {
-                        return (
-                            <tr key={manufacturer.id}>
-                                <td>{manufacturer.name}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.manufacturers.map(manufacturer => {
+                            return (
+                                <tr key={manufacturer.id}>
+                                    <td>{manufacturer.name}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
                 </table>
             </div>
 
