@@ -5,13 +5,14 @@ import AddSalesPersonForm from './AddSalesPersonForm';
 import AddPotentialCustomerForm from './PotentialCustomerForm';
 import ManufacturerForm from './ManufacturerForm';
 import ManufacturerList from './ManufacturerList';
+import AutoForm from './AutomobileForm';
 import SaleRecordForm from './CreateSaleForm'
 import TechForm from './TechForm';
 import ServiceApptForm from './ServiceApptForm';
 import ServiceApptsList from './ServiceApptsList';
 import CreateModelForm from './CreateModelForm';
 import ServiceHistoryList from './ServiceHistoryList';
-import SalesPersonHistoryList from './SalesPersonHistory';
+// import SalesPersonHistoryList from './SalesPersonHistory';
 import ModelList from './ModelList';
 import AutoList from './AutomobileList';
 import ListSales from './ListSales';
@@ -30,7 +31,7 @@ function App() {
           <Route path="customer" element={<AddPotentialCustomerForm />} />
           <Route path="new" element={<SaleRecordForm/>} />
             <Route path="list" element={<ListSales />} />
-            <Route path="history" element={<SalesPersonHistoryList/>} />
+            {/* <Route path="history" element={<SalesPersonHistoryList/>} /> */}
           </Route>
           <Route path= "manufacturer">
           <Route path="new" element={<ManufacturerForm />} />
@@ -38,7 +39,7 @@ function App() {
           <Route path="lists" element={<ManufacturerList />} />
           <Route path="list" element={<ModelList/>} />
           <Route path="autolist" element={<AutoList/>} />
-
+          <Route path="autoform" element={<AutoForm/>} />
           </Route>
           <Route path='service/tech/' element={<TechForm />} />
           <Route path='service/appt/' element={<ServiceApptForm />} />

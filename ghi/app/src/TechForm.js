@@ -4,6 +4,7 @@ import React from 'react';
 class TechForm extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       tech_name: '',
       employee_num: '',
