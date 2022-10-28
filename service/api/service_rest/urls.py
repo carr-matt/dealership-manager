@@ -1,16 +1,16 @@
 from django.urls import path
 from .views import (
-    api_list_appointment,
-    api_show_appointment,
-    api_list_tech,
-    api_show_tech,
-    api_appt_history,
+    api_list_services,
+    api_show_service,
+    api_list_technicians,
 )
 
+
+
 urlpatterns = [
-    path("service/appt/", api_list_appointment, name="api_list_appointment"),
-    path("service/appt/<int:pk>/", api_show_appointment, name="api_show_appointment"),
-    path("service/history/<str:vin>/", api_appt_history, name="api_appt_history"),
-    path("service/tech/", api_list_tech, name="api_list_tech"),
-    path("tech/<int:pk>/", api_show_tech, name="api_show_tech"),
-    ]
+    path("service/", api_list_services, name="api_create_services"),
+    path("<str:vin_vo_id>/service/", api_list_services, name="api_list_services"),
+    path("service/<int:pk>/", api_show_service, name="api_show_service"),
+    path("tech/", api_list_technicians, name="api_create_technicians"),
+
+]
