@@ -8,6 +8,7 @@ class ServiceApptForm extends React.Component {
             owner: "",
             date: "",
             time: "",
+            tech: "",
             techs: [],
             reason: "",
         }
@@ -19,6 +20,7 @@ class ServiceApptForm extends React.Component {
         this.handleTechChange = this.handleTechChange.bind(this)
         this.handleReasonChange = this.handleReasonChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+
     }
 
     handleVinChange(event) {
@@ -57,26 +59,25 @@ class ServiceApptForm extends React.Component {
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json',
-            }
-        }
+            },
+        };
 
         const response = await fetch(apptUrl, fetchConfig)
 
-    if (response.ok) {
-        const Appt = await response.json()
-        console.log(Appt)
-
-        const cleared = {
-            vin: "",
-            owner: "",
-            date: "",
-            time: "",
-            tech: "",
-            reason: "",
+        if (response.ok) {
+            const Appt = await response.json()
+            console.log(Appt)
+            const cleared = {
+                vin: "",
+                owner: "",
+                date: "",
+                time: "",
+                tech: "",
+                reason: "",
+            }
+            this.setState(cleared)
         }
-        this.setState(cleared)
-    }
-    }
+        }
 
     async componentDidMount() {
         const url = 'http://localhost:8080/api/service/tech/'
@@ -85,7 +86,8 @@ class ServiceApptForm extends React.Component {
 
         if (response.ok) {
             const data = await response.json()
-            this.setState({techs: data.techs })
+            console.log(data)
+            this.setState({techs: data.tech })
         }
     }
 
@@ -117,12 +119,11 @@ render() {
                 <input value={this.state.reason} onChange={this.handleReasonChange} placeholder="reason" name="color" type="text" id="reason" className="form-control"/>
                 <label htmlFor="reason">Reason for Service</label>
                 </div>
-                <select onChange={this.handleTechChange} required id="tech" name="tech" className="form-select">
+                <select value={this.state.tech} onChange={this.handleTechChange} required id="tech" name="tech" className="form-select">
                     <option value="">Choose a Tech</option>
                     {this.state.techs.map(tech => {
                     return (
-                        <option key={tech.id} value={tech.id}>
-                        {tech.tech_name}
+                        <option key={tech.id} value={tech.id}>{tech.name}
                         </option>
                     )
                     })}

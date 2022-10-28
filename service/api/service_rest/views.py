@@ -19,7 +19,7 @@ def api_list_appointment(request):
     else:
         content = json.loads(request.body)
         tech_id = content["tech"]
-        tech = Tech.objects.get(employee_id=tech_id)
+        tech = Tech.objects.get(id=tech_id)
         content["tech"] = tech
         appointment = Appointment.objects.create(**content)
         return JsonResponse(

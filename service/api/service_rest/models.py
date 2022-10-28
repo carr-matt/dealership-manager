@@ -11,7 +11,7 @@ class AutomobileVO(models.Model):
 
 class Tech(models.Model):
     name = models.CharField(max_length=50)
-    employee_id = models.IntegerField(primary_key=True)
+    employee_id = models.IntegerField(unique=True)
 
     def __str__(self):
         return f"{self.name} #{self.employee_id}"
@@ -24,5 +24,5 @@ class Appointment(models.Model):
     date = models.DateField(blank=True, null=True)
     time = models.TimeField(blank=True, null=True)
     reason = models.CharField(max_length=400)
-    finished = models.BooleanField()
+    finished = models.BooleanField(default=False)
     vip = models.BooleanField(default=False)

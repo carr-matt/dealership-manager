@@ -14,6 +14,7 @@ class AutomobileVOEncoder(ModelEncoder):
 class TechEncoder(ModelEncoder):
     model = Tech
     properties = [
+        "id",
         "name",
         "employee_id",
     ]
@@ -27,10 +28,14 @@ class AppointmentEncoder(ModelEncoder):
         "tech",
         "owner",
         "date",
+        "time",
         "reason",
         "finished",
-        "vip",
     ]
     encoders = {
         "tech": TechEncoder(),
     }
+    def get_extra_data(self, o):
+        count = AutomobileVO.objects.filter(vin=o.vin).count()
+        return {"vip": count > 0}
+
