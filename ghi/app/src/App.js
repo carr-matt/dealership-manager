@@ -12,7 +12,7 @@ import ServiceApptForm from './ServiceApptForm';
 import ServiceApptsList from './ServiceApptsList';
 import CreateModelForm from './CreateModelForm';
 import ServiceHistoryList from './ServiceHistoryList';
-// import SalesPersonHistoryList from './SalesPersonHistory';
+import SalesPersonHistoryList from './SalesPersonHistory';
 import ModelList from './ModelList';
 import AutoList from './AutomobileList';
 import ListSales from './ListSales';
@@ -31,7 +31,7 @@ function App() {
           <Route path="customer" element={<AddPotentialCustomerForm />} />
           <Route path="new" element={<SaleRecordForm/>} />
             <Route path="list" element={<ListSales />} />
-            {/* <Route path="history" element={<SalesPersonHistoryList/>} /> */}
+            <Route path="history" element={<SalesPersonHistoryList/>} />
           </Route>
           <Route path= "manufacturer">
           <Route path="new" element={<ManufacturerForm />} />
