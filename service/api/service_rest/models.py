@@ -6,23 +6,27 @@ from django.db import models
 
 class AutomobileVO(models.Model):
     vin = models.CharField(max_length=17, unique=True)
-    import_href = models.CharField(max_length=200, null=True, unique=True)
+    import_href = models.CharField(max_length=200, unique=True)
 
 
-class Tech(models.Model):
-    name = models.CharField(max_length=50)
-    employee_id = models.IntegerField(primary_key=True)
+class Technician(models.Model):
+    tech_name = models.CharField(max_length=100)
+    employee_num = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
-        return f"{self.name} #{self.employee_id}"
+        return f"{self.tech_name} #{self.employee_num}"
 
 
-class Appointment(models.Model):
+class Service(models.Model):
+    owner_name = models.CharField(max_length=100)
+    appointment = models.DateTimeField(null=True)
     vin = models.CharField(max_length=17)
-    tech = models.ForeignKey(Tech, related_name="appointment", on_delete=models.PROTECT)
-    owner = models.CharField(max_length=50)
-    date = models.DateField(blank=True, null=True)
-    time = models.TimeField(blank=True, null=True)
-    reason = models.CharField(max_length=400)
-    finished = models.BooleanField()
+    reason = models.CharField(max_length=100)
     vip = models.BooleanField(default=False)
+    finished = models.BooleanField(default=False)
+
+    tech_name = models.ForeignKey(
+        Technician,
+        related_name="services",
+        on_delete=models.PROTECT,
+    )

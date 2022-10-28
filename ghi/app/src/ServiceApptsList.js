@@ -1,107 +1,115 @@
 import React from 'react';
 
-class ServiceApptsList extends React.Component{
-    constructor() {
-        super()
-        this.state = {
-            "appts": []
-        }
-        this.handleDeleteClick = this.handleDeleteClick.bind(this)
-        this.handleFinishClick = this.handleFinishClick.bind(this)
-    }
-async componentDidMount() {
-    this.showAppointments()
 
-}
-async showAppointments() {
-    const url = 'http://localhost:8080/api/service/appt/'
-    let response = await fetch(url)
 
+class ServiceApptsList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      services: [],
+    };
+  }
+
+  async componentDidMount() {
+    const servicesUrl = 'http://localhost:8080/api/service/';
+    const response = await fetch(servicesUrl);
     if (response.ok) {
-        let data = await response.json()
-        let filteredData = await data.appts.filter(appt => appt.finished !== true)
-        this.setState({"appts": filteredData})
+      const data = await response.json();
+      this.setState({ services: data.services })
     }
-}
+  }
 
-
-
-async handleDeleteClick(event) {
-    console.log('remove')
-    const id = event.target.value
-    const url = `http://localhost:8080/api/appt/${id}/`
+  handleOnRemove = async (event) => {
+    const id = event.target.value;
+    const serviceUrl = `http://localhost:8080/api/service/${id}/`;
     const fetchConfig = {
-        method: "DELETE",
-        headers: {
-            'Content-Type': 'application.json'
-        }
-    }
-    const response = await fetch(url, fetchConfig)
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const response = await fetch(serviceUrl, fetchConfig);
     if (response.ok) {
-        this.setState({appts: this.state.appts.filter(appt => appt.id !== id)})
-        alert("Appointment Deleted")
+      this.setState({
+        services: this.state.services.filter(service => service.id !== id)
+      })
     }
-}
+  }
 
+  handleFinished = async (event) => {
+    event.preventDefault();
+    const data = { ...this.state };
+    delete data.services;
 
-async handleFinishClick(event) {
-    const id = event.target.value
-    const url = `http://localhost:8080/api/appt/${id}/`
+    const id = event.target.value;
+    const serviceUrl = `http://localhost:8080/api/service/${id}/`;
     const fetchConfig = {
-        method: "PUT",
-        body: JSON.stringify({
-            "finished": true
-        }),
-        headers: {
-            'Content-Type': 'application.json'
-        }
-    }
-    const response = await fetch(url, fetchConfig)
+      method: "PUT",
+      body: JSON.stringify({ finished: true }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const response = await fetch(serviceUrl, fetchConfig);
+
     if (response.ok) {
-        this.showAppointments()
-        alert("Appointment Finished")
+      this.setState({
+        services: this.state.services.filter(service => service.id !== id)
+      })
     }
-}
+
+  }
 
 
-render () {
+  render() {
+
     return (
-        <div>
-        <table className="table table-striped">
-        <thead>
-            <tr>
-            <th>VIP Status</th>
-            <th>VIN</th>
-            <th>Customer Name</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Technician</th>
-            <th>Reason</th>
-            <th>Status</th>
-            <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {this.state.appts.map(appt => {
-            return (
-                <tr key={appt.id}>
-                <td>{ String(appt.VIP) }</td>
-                <td>{ appt.vin }</td>
-                <td>{ appt.owner }</td>
-                <td>{ appt.date }</td>
-                <td>{ appt.time }</td>
-                <td>{ appt.tech.name }</td>
-                <td>{ appt.reason }</td>
-                <td><button onClick={ this.handleDeleteClick} value = {appt.id} className="btn btn-outline-danger btn-sm">Cancel</button></td>
-                <td><button onClick={ this.handleFinishClick} value = {appt.id} className="btn btn-outline-danger btn-sm">Finish</button></td>
-                </tr>
-            );
-            })}
-        </tbody>
-        </table>
+      <>
+        <div className="my-5 container">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>VIP</th>
+                <th>VIN</th>
+                <th>Owner</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Technician</th>
+                <th>Reason</th>
+                <th>Cancel/Complete</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {this.state.services.map(service => {
+                return !service.finished && (
+                  <tr key={service.id}>
+
+                    {service.vip ? <td>VIP</td> : <td>NOT VIP</td>}
+
+                    <td>{service.vin}</td>
+                    <td>{service.owner_name}</td>
+                    <td>{new Date(service.appointment).toLocaleDateString()}</td>
+                    <td>{new Date(service.appointment).toLocaleTimeString()}</td>
+                    <td>{service.tech_name.tech_name}</td>
+                    <td>{service.reason}</td>
+                    <td>
+                      <button onClick={this.handleOnRemove} value={service.id} className="btn btn-sm">
+                        Cancel</button>
+                      <button onClick={this.handleFinished} value={service.id} className="btn btn-sm">
+                        Complete</button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
-    );
-    }
+      </>
+    )
+  }
 }
 
-export default ServiceApptsList;
+
+export default ServiceApptsList
