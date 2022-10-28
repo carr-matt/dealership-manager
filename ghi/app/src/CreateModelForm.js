@@ -52,15 +52,6 @@ class CreateModelForm extends React.Component {
                 picture_url: "",
                 manufacturer_id: "",
             })
-            //     const CreateModelForm= await response.json();
-            // console.log(CreateModelForm);
-
-            // const cleared ={
-            //     name: "",
-            //     picture_url: "",
-            //     manufacturers: [],
-            // }
-            // this.setState(cleared)
         }
     };
 
