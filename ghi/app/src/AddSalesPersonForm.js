@@ -56,7 +56,7 @@ class AddSalesPersonForm extends React.Component {
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
                         <h1>Add a new sales person</h1>
-                        <form onSubmit={this.handleSubmit} id="create-salesperson-form">
+                        <form onSubmit={this.handleSubmit}>
                             <div className="form-floating mb-3">
                                 <input onChange={this.handleInputChange} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
                                 <label htmlFor="name">Name</label>

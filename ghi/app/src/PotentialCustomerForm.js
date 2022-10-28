@@ -61,7 +61,7 @@ class AddPotentialCustomerForm extends React.Component {
                                 <input onChange={this.handleInputChange} value={this.state.phone} placeholder="Phone Number" required type="text" name="phone" id="phone" className="form-control" />
                                 <label htmlFor="id">Add Phone Number</label>
                             </div>
-                            <button className="btn btn-primary" id="salesPersBtn">Create</button>
+                            <button className="btn btn-primary">Create</button>
                         </form>
                     </div>
                 </div>

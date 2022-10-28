@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 class ManufacturerForm extends React.Component {
     constructor(props) {
         super(props)
@@ -27,14 +28,14 @@ class ManufacturerForm extends React.Component {
             'Content-Type': 'application/json',
             },
         }
+
         const response = await fetch(manufactuerUrl, fetchConfig);
         if(response.ok){
-                const newSalesPerson = await response.json();
-            console.log(newSalesPerson);
+                const newManufacturerForm = await response.json();
+            console.log(newManufacturerForm);
 
             const cleared ={
                 name: "",
-                employee_id: "",
             }
             this.setState(cleared)
         }
@@ -45,10 +46,10 @@ class ManufacturerForm extends React.Component {
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
                         <h1>Create Manufacturer</h1>
-                        <form onSubmit={this.handleSubmit} id="create-hat-form">
+                        <form onSubmit={this.handleSubmit}>
                             <div className="form-floating mb-3">
                                 <input onChange={this.handleInputChange} value={this.state.name} placeholder="name" required type="text" name="name" id="name" className="form-control" />
-                                <label htmlFor="manufacturer">Name</label>
+                                <label htmlFor="manufacturer">Manufacturer Name</label>
                             </div>
                             <button className="btn btn-primary">Create</button>
                         </form>
