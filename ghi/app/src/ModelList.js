@@ -1,39 +1,44 @@
 import React from 'react';
 
-class ManufacturerList extends React.Component {
+class ModelList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            manufacturers: []
+            models: []
             };
         }
 
     async componentDidMount() {
-        const url = 'http://localhost:8100/api/manufacturers/'
+        const url = 'http://localhost:8100/api/models/'
 
         const response = await fetch(url);
 
         if (response.ok) {
             const data = await response.json();
-            this.setState({manufacturers: data.manufacturers})
+            this.setState({models: data.models})
         }
     }
 
     render() {
         return(
             <div className="container">
-                <h1>List of manufacturers</h1>
+                <h1>List of models</h1>
                 <table className="table table-striped">
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Manufacturer</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.manufacturers.map(manufacturer => {
+                    {this.state.models.map(model => {
                         return (
-                            <tr key={manufacturer.id}>
-                                <td>{manufacturer.name}</td>
+                            <tr key={model.id}>
+                                <td>{model.name}</td>
+                                <td>{model.manufacturer.name}</td>
+                                <td>
+                                    <img alt="" className="photo" width="300" height="200" src={model.picture_url}></img>
+                                </td>
                             </tr>
                         )
                     })}
@@ -46,4 +51,4 @@ class ManufacturerList extends React.Component {
 
 }
 
-export default ManufacturerList;
+export default ModelList;

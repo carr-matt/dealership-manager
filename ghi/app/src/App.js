@@ -10,6 +10,11 @@ import TechForm from './TechForm';
 import ServiceApptForm from './ServiceApptForm';
 import ServiceApptsList from './ServiceApptsList';
 import CreateModelForm from './CreateModelForm';
+import SalesPersonHistoryList from './SalesPersonHistory';
+import ModelList from './ModelList';
+import AutoList from './AutomobileList';
+
+
 
 function App() {
   return (
@@ -17,16 +22,20 @@ function App() {
       <Nav />
       <div className="container">
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<MainPage  />} />
           <Route path="sales">
             <Route path="person" element={<AddSalesPersonForm/>} />
             <Route path="customer" element={<AddPotentialCustomerForm />} />
             <Route path="new" element={<SaleRecordForm/>} />
+            <Route path="history" element={<SalesPersonHistoryList />} />
           </Route>
           <Route path= "manufacturer">
           <Route path="new" element={<ManufacturerForm />} />
-          <Route path="" element={<ManufacturerList />} />
           <Route path="model" element={<CreateModelForm />} />
+          <Route path="lists" element={<ManufacturerList />} />
+          <Route path="list" element={<ModelList/>} />
+          <Route path="autolist" element={<AutoList/>} />
+
           </Route>
           <Route path='service/tech/' element={<TechForm />} />
           <Route path='service/appt/' element={<ServiceApptForm />} />
