@@ -11,7 +11,6 @@ class AddPotentialCustomerForm extends React.Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleInputChange = this.handleInputChange.bind(this);
     }
     handleInputChange=(event)=> {
         const value = event.target.value;

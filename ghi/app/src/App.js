@@ -13,6 +13,7 @@ import CreateModelForm from './CreateModelForm';
 import SalesPersonHistoryList from './SalesPersonHistory';
 import ModelList from './ModelList';
 import AutoList from './AutomobileList';
+import ListSales from './ListSales';
 
 
 
@@ -27,7 +28,8 @@ function App() {
             <Route path="person" element={<AddSalesPersonForm/>} />
             <Route path="customer" element={<AddPotentialCustomerForm />} />
             <Route path="new" element={<SaleRecordForm/>} />
-            <Route path="history" element={<SalesPersonHistoryList />} />
+            <Route path="list" element={<ListSales />} />
+            <Route path="history" element={<SalesPersonHistoryList/>} />
           </Route>
           <Route path= "manufacturer">
           <Route path="new" element={<ManufacturerForm />} />

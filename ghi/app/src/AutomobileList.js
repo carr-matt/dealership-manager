@@ -39,6 +39,7 @@ class AutoList extends React.Component {
                             <tr key={auto.id}>
                                 <td>{auto.vin}</td>
                                 <td>{auto.color}</td>
+                                <td>{auto.year}</td>
                                 <td>{auto.model.name}</td>
                                 <td>{auto.model.manufacturer.name}</td>
                             </tr>
